@@ -6,7 +6,7 @@ using RestWithAspNetCoreUdemy.Services.Interfaces;
 namespace RestWithAspNetCoreUdemy.Controllers
 {
     [ApiVersion("1")]
-    [Route("api/[controller]/v{version:apiVersion}")]
+    [Route("api/v{version:apiVersion}/[controller]")]
 
     public class PersonController : Controller
     {
@@ -46,8 +46,15 @@ namespace RestWithAspNetCoreUdemy.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody]Person person)
         {
-            if (person == null) return NotFound();
-            return Ok(_personService.Update(person));
+            if (person == null) 
+                return BadRequest();
+            
+            var updatedPerson = _personService.Update(person);
+            
+            if (updatedPerson == null)
+                return NoContent();
+
+            return new ObjectResult (updatedPerson);
         }
 
         // DELETE api/values/5
