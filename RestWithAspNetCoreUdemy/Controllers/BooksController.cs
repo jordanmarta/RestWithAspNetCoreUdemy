@@ -1,5 +1,6 @@
 ﻿        using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using RestWithAspNetCoreUdemy.Data.VO;
 using RestWithAspNetCoreUdemy.Models;
 using RestWithAspNetCoreUdemy.Services.Interfaces;
 
@@ -36,7 +37,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Book book)
+        public IActionResult Post([FromBody]BookVO book)
         {
             if (book == null) return NotFound();
                 return Ok(_bookService.Create(book));
@@ -44,7 +45,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody]Book book)
+        public IActionResult Put([FromBody]BookVO book)
         {
             if (book == null)
                 return BadRequest();
