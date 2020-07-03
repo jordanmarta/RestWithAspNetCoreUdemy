@@ -8,60 +8,60 @@ namespace RestWithAspNetCoreUdemy.Controllers
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
 
-    public class PersonController : Controller
+    public class BooksController : Controller
     {
-        private IPersonService _personService;
+        private IBookService _bookService;
 
-        public PersonController(IPersonService personService)
+        public BooksController(IBookService personService)
         {
-            _personService = personService;
+            _bookService = personService;
         }
 
         // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_personService.FindAll());
+            return Ok(_bookService.FindAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var person =_personService.FindById(id);
-            if (person == null) return NotFound();
-            
-            return Ok(person);
+            var book = _bookService.FindById(id);
+            if (book == null) return NotFound();
+
+            return Ok(book);
         }
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Person person)
+        public IActionResult Post([FromBody]Book book)
         {
-            if (person == null) return NotFound();
-            return Ok(_personService.Create(person));
+            if (book == null) return NotFound();
+                return Ok(_bookService.Create(book));
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody]Person person)
+        public IActionResult Put([FromBody]Book book)
         {
-            if (person == null) 
+            if (book == null)
                 return BadRequest();
-            
-            var updatedPerson = _personService.Update(person);
-            
-            if (updatedPerson == null)
+
+            var updatedBook = _bookService.Update(book);
+
+            if (updatedBook == null)
                 return NoContent();
 
-            return new ObjectResult (updatedPerson);
+            return new ObjectResult(book);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _personService.Delete(id);
+            _bookService.Delete(id);
             return NoContent();
         }
     }

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace RestWithAspNetCoreUdemy.Repository.Concretes
 {
-    public class PersonRepositoryImpl : IPersonRepository
+    public class PersonRepository : IPersonRepository
     {
         private readonly MySqlContext _context;
 
-        public PersonRepositoryImpl(MySqlContext context)
+        public PersonRepository(MySqlContext context)
         {
             _context = context;
         }

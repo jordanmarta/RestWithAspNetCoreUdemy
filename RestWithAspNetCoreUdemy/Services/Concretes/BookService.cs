@@ -11,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace RestWithAspNetCoreUdemy.Services.Concretes
 {
-    public class PersonService : IPersonService
+    public class BookService : IBookService
     {
-        private IRepository<Person> _repository;
+        private IRepository<Book> _repository;
 
-        public PersonService(IRepository<Person> repository)
+        public BookService(IRepository<Book> repository)
         {
             _repository = repository;
         }
 
-        public Person Create(Person book)
+        public Book Create(Book book)
         {
             return _repository.Create(book);
         }
@@ -30,17 +30,17 @@ namespace RestWithAspNetCoreUdemy.Services.Concretes
             _repository.Delete(id);
         }
 
-        public List<Person> FindAll()
+        public List<Book> FindAll()
         {
             return _repository.FindAll();
         }
 
-        public Person FindById(long id)
+        public Book FindById(long id)
         {
-            return _repository.FindById(id);
+            return _repository.FindById(id);    
         }
 
-        public Person Update(Person person)
+        public Book Update(Book person)
         {
             return _repository.Update(person);
         }
