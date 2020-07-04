@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using RestWithAspNetCoreUdemy.Data.VO;
 using RestWithAspNetCoreUdemy.Models;
 using RestWithAspNetCoreUdemy.Services.Interfaces;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Tapioca.HATEOAS;
 
 namespace RestWithAspNetCoreUdemy.Controllers
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
-
     public class PersonController : Controller
     {
         private IPersonService _personService;
@@ -18,15 +19,17 @@ namespace RestWithAspNetCoreUdemy.Controllers
             _personService = personService;
         }
 
-        // GET api/values
+
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(_personService.FindAll());
         }
 
-        // GET api/values/5
+
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(int id)
         {
             var person =_personService.FindById(id);
@@ -35,16 +38,18 @@ namespace RestWithAspNetCoreUdemy.Controllers
             return Ok(person);
         }
 
-        // POST api/values
+
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody]PersonVO person)
         {
             if (person == null) return NotFound();
             return Ok(_personService.Create(person));
         }
 
-        // PUT api/values/5
+
         [HttpPut("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody]PersonVO person)
         {
             if (person == null) 
@@ -58,8 +63,9 @@ namespace RestWithAspNetCoreUdemy.Controllers
             return new ObjectResult (updatedPerson);
         }
 
-        // DELETE api/values/5
+        
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
             _personService.Delete(id);
