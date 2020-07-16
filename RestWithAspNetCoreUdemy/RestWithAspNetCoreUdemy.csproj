@@ -6,9 +6,14 @@
   
   <Target Name="Build" />
   <Target Name="Rebuild" />
+  <ItemGroup>
+    <Compile Remove="db\**" />
+    <Content Remove="db\**" />
+    <EmbeddedResource Remove="db\**" />
+    <None Remove="db\**" />
+  </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="db\dataset\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

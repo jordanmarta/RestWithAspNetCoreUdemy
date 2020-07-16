@@ -1,4 +1,5 @@
 ﻿        using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWithAspNetCoreUdemy.Data.VO;
 using RestWithAspNetCoreUdemy.Models;
@@ -21,6 +22,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
 
         [HttpGet]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -29,6 +31,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
 
         [HttpGet("{id}")]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(int id)
         {
@@ -40,6 +43,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
 
         [HttpPost]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody]PersonVO person)
         {
@@ -49,6 +53,7 @@ namespace RestWithAspNetCoreUdemy.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody]PersonVO person)
         {
@@ -63,8 +68,26 @@ namespace RestWithAspNetCoreUdemy.Controllers
             return new ObjectResult (updatedPerson);
         }
 
-        
+
+        [HttpPatch("{id}")]
+        [Authorize("Bearer")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch([FromBody]PersonVO person)
+        {
+            if (person == null)
+                return BadRequest();
+
+            var updatedPerson = _personService.Update(person);
+
+            if (updatedPerson == null)
+                return NoContent();
+
+            return new ObjectResult(updatedPerson);
+        }
+
+
         [HttpDelete("{id}")]
+        [Authorize("Bearer")]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {

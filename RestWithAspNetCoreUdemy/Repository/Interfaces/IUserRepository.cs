@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RestWithAspNetCoreUdemy.Repository.Interfaces
 {
-    public interface IPersonRepository
+    public interface IUserRepository
     {
-        Person Create(Person person);
-        Person FindById(long id);
-        List<Person> FindAll();
-        Person Update(Person person);
-        void Delete(long id);
+        User FindByLogin(string login);
     }
 }
