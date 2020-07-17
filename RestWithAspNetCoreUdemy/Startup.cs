@@ -122,10 +122,12 @@ namespace RestWithAspNetCoreUdemy
             // DI
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IFileService, FileService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
 
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }

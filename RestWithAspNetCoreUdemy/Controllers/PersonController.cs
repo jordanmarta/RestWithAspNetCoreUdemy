@@ -1,10 +1,7 @@
-﻿        using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestWithAspNetCoreUdemy.Data.VO;
-using RestWithAspNetCoreUdemy.Models;
 using RestWithAspNetCoreUdemy.Services.Interfaces;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Tapioca.HATEOAS;
 
 namespace RestWithAspNetCoreUdemy.Controllers
@@ -27,6 +24,24 @@ namespace RestWithAspNetCoreUdemy.Controllers
         public IActionResult Get()
         {
             return Ok(_personService.FindAll());
+        }
+
+        [HttpGet("FindByName")]
+        [Authorize("Bearer")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetByName([FromQuery]string firstName, [FromQuery] string lastName)
+        {
+            return Ok(_personService.FindByName(firstName, lastName));
+        }
+
+
+        [HttpGet("GetPagedSearch/{sortDirection}/{pageSize}/{page}")]
+        [Authorize("Bearer")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetPagedSearch([FromQuery]string name, string sortDirection, int pageSize, int page)
+        
+        {
+            return Ok(_personService.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
 
 

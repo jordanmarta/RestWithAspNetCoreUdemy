@@ -1,8 +1,5 @@
 ﻿using RestWithAspNetCoreUdemy.Models.Base;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestWithAspNetCoreUdemy.Repository.Generic
 {
@@ -13,5 +10,7 @@ namespace RestWithAspNetCoreUdemy.Repository.Generic
         List<T> FindAll();
         T Update(T model);
         void Delete(long id);
+        List<T> FindWithPagedSearch(string query);
+        int GetCount(string query);
     }
 }
