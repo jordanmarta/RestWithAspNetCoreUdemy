@@ -162,22 +162,22 @@ namespace RestWithAspNetCoreUdemy
 
         private void ExecuteMigrations(string connectionString)
         {
-            try
-            {
-                var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
-                var evolve = new Evolve.Evolve("evolve.json", evolveConnection, msg => _logger.LogInformation(msg))
-                {
-                    Locations = new List<string> { "db/migrations" },
-                    IsEraseDisabled = true,
-                };
+            //try
+            //{
+            //    var evolveConnection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            //    var evolve = new Evolve.Evolve("evolve.json", evolveConnection, msg => _logger.LogInformation(msg))
+            //    {
+            //        Locations = new List<string> { "db/migrations" },
+            //        IsEraseDisabled = true,
+            //    };
 
-                evolve.Migrate();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("Database migration failed", ex);
-                throw;
-            }
+            //    evolve.Migrate();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogCritical("Database migration failed", ex);
+            //    throw;
+            //}
         }
     }
 }

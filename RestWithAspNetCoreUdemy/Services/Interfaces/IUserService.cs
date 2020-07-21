@@ -1,5 +1,4 @@
 ﻿using RestWithAspNetCoreUdemy.Models;
-using RestWithAspNetCoreUdemy.Models;
 
 namespace RestWithAspNetCoreUdemy.Services.Interfaces
 {
